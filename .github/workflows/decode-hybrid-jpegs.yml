@@ -1,0 +1,64 @@
+name: Decode hybrid JPEGs onto gh-pages
+on:
+  push:
+    branches: [claw]
+    paths:
+      - 'image-payloads/**'
+      - '.github/workflows/decode-hybrid-jpegs.yml'
+permissions:
+  contents: write
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout claw
+        uses: actions/checkout@v4
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: site
+      - name: Decode and write JPEGs
+        run: |
+          python3 << 'PY'
+          import base64, hashlib, pathlib
+          from collections import defaultdict
+          src = pathlib.Path('image-payloads')
+          dest = pathlib.Path('site/assets/images')
+          dest.mkdir(parents=True, exist_ok=True)
+          expected = {
+            'containers-yard.jpg': (282349, '052901428780756d109cc3908b8679c647b99fac7166f10b42392a3129084081'),
+            'port-baltimore.jpg': (319706, 'ef26182d5fcc244ce4f3422a58ace183660004ff238a57176cc0adf165d04952'),
+            'integration.jpg': (198616, '11e4825c6dbf1bfa1a79ac263f59661a8403e9ef19d645e414256a24ea05b40a'),
+            'logistics-usa.jpg': (376501, 'b01f32be4f626f47d78c3c7c186c46ae0d6a804a23912b8d259edaf24da00666'),
+            'containers-night.jpg': (421748, 'dc12ca40a94876e00f1abd0677f8365448708e10d36eeb8f1b67c7665df5bc7e'),
+            'trucks-dusk.jpg': (350969, 'c5ca54984abca495353d9d9edbc7759ee9410761b032ec5cc6e5cdb69e169930'),
+            'containers-field.jpg': (339479, '8694c601bc1216187d9aadee9980276e24bd80b2f46af39609f767a1fa693290'),
+          }
+          groups = defaultdict(list)
+          for p in sorted(src.glob('*.part*')):
+              name = p.name.rsplit('.part', 1)[0]
+              groups[name].append(p.read_text().strip())
+          if not groups:
+              print('no parts yet')
+              raise SystemExit(0)
+          for name, chunks in groups.items():
+              raw = base64.b64decode(''.join(chunks))
+              out = dest / name
+              out.write_bytes(raw)
+              h = hashlib.sha256(raw).hexdigest()
+              print(name, len(raw), h, 'jpeg' if raw[:3]==b'\xff\xd8\xff' else 'NOTJPEG')
+              if name in expected:
+                  exp_len, exp_hash = expected[name]
+                  if len(raw)!=exp_len or h!=exp_hash:
+                      raise SystemExit(f'hash/size mismatch for {name}: got {len(raw)} {h}')
+          PY
+      - name: Commit and push to gh-pages
+        working-directory: site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A assets/images
+          git status
+          git diff --cached --quiet || git commit -m "Add hybrid site JPEG assets under assets/images"
+          git push origin HEAD:gh-pages
