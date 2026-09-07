@@ -49,6 +49,22 @@
     }
   }
 
+
+  /* Apple Design: feedback on pointer-down, not click. Critically damped settle. */
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll(".btn").forEach(function (btn) {
+    btn.addEventListener("pointerdown", function () {
+      if (reduceMotion) return;
+      btn.classList.add("is-pressed");
+    });
+    var clear = function () {
+      btn.classList.remove("is-pressed");
+    };
+    btn.addEventListener("pointerup", clear);
+    btn.addEventListener("pointercancel", clear);
+    btn.addEventListener("pointerleave", clear);
+  });
+
   var form = document.querySelector("[data-quote-form]");
   if (!form) {
     return;
