@@ -85,6 +85,9 @@
     phone: function (value) {
       var digits = value.replace(/[^0-9]/g, "");
       return digits.length >= 7 ? "" : "Please enter a valid phone number.";
+    },
+    description: function (value) {
+      return value.trim().length >= 2 ? "" : "Please add a short description.";
     }
   };
 
@@ -97,7 +100,7 @@
     return !message;
   };
 
-  form.querySelectorAll("input").forEach(function (input) {
+  form.querySelectorAll("input, textarea").forEach(function (input) {
     input.addEventListener("blur", function () {
       check(input);
     });
@@ -111,7 +114,7 @@
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    var inputs = Array.prototype.slice.call(form.querySelectorAll("input"));
+    var inputs = Array.prototype.slice.call(form.querySelectorAll("input, textarea"));
     var valid = inputs.map(check).every(Boolean);
 
     if (!valid) {
@@ -134,7 +137,9 @@
       "\nEmail: " +
       values.email +
       "\nPhone: " +
-      values.phone;
+      values.phone +
+      "\nDescription: " +
+      (values.description || "");
 
     if (doneName) {
       doneName.textContent = values.name.split(" ")[0];
