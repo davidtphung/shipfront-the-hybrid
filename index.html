@@ -24,7 +24,51 @@
     <style>
       /* David 8 Sep 10:14 PM: 125% of S. Keep the 10px gap. */
       .mark { gap: 10px; align-items: center; }
+      .valuebar-label { justify-content: center; text-align: center; }
       .mark svg.cube, .mark .cube { width: 1.62em !important; height: 1.75em !important; }
+
+      /* Six words orbit the hero box. Static. Equally spaced. Clockwise from top. */
+      .stage { overflow: visible; }
+      .stage .orbit {
+        position: absolute;
+        left: 8%;
+        right: 8%;
+        top: 10%;
+        bottom: 10%;
+        border: 1px solid rgba(255, 106, 0, 0.5);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .orbit-nodes {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        z-index: 4;
+      }
+      .orbit-node {
+        position: absolute;
+        left: calc(50% + 46% * cos(var(--a)));
+        top: calc(50% + 40% * sin(var(--a)));
+        transform: translate(-50%, -50%);
+        margin: 0;
+        padding: 6px 10px;
+        border: 1px solid #ff6a00;
+        border-radius: 999px;
+        background: #000;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+      }
+      .stage-art, .stage-brand, .stage-bullets { display: none !important; }
+      @media (max-width: 860px) {
+        .orbit-node { font-size: 11px; padding: 5px 8px; }
+        .stage .orbit { left: 4%; right: 4%; top: 8%; bottom: 8%; }
+      }
     </style>
   </head>
   <body>
@@ -114,11 +158,12 @@
               <path class="edge" d="M12 12.5 L12 19" />
             </svg>
             <ol class="orbit-nodes" aria-label="Shipfront services">
-              <li class="orbit-node" style="--a: 0deg">Inbound</li>
-              <li class="orbit-node" style="--a: 72deg">Storage</li>
-              <li class="orbit-node" style="--a: 144deg">Inventory management</li>
-              <li class="orbit-node" style="--a: 216deg">Kitting / special projects</li>
-              <li class="orbit-node" style="--a: 288deg">Fulfillment</li>
+              <li class="orbit-node" style="--a: -90deg">Inbound</li>
+              <li class="orbit-node" style="--a: -30deg">Storage</li>
+              <li class="orbit-node" style="--a: 30deg">Inventory management</li>
+              <li class="orbit-node" style="--a: 90deg">Kitting</li>
+              <li class="orbit-node" style="--a: 150deg">Special projects</li>
+              <li class="orbit-node" style="--a: 210deg">Fulfillment</li>
             </ol>
           </div>
         </div>
@@ -281,7 +326,7 @@
       <section class="section" id="fulfillment">
         <div class="shell split split-flip reveal">
           <figure class="split-media">
-            <img src="assets/images/procurement.jpg" width="2400" height="1800" alt="Overhead pick floor with yellow bins and cartons" loading="lazy" decoding="async" />
+            <img src="assets/images/procurement-dusk.jpg" width="2400" height="1800" alt="Overhead pick floor with yellow bins and cartons" loading="lazy" decoding="async" />
           </figure>
           <div class="split-copy">
             <span class="eyebrow">02 / Fulfillment</span>
