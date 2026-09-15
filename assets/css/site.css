@@ -1343,6 +1343,10 @@ section {
   .wordmark {
     font-size: 17px;
   }
+  .mark {
+    font-size: 17px;
+    gap: 8px;
+  }
 
   .section {
     padding: 66px 0;
@@ -1627,3 +1631,273 @@ section {
 }
 
 
+
+
+/* ---------- kunal 8 sep live ---------- */
+/* Kunal pick 8 Sep 9:49 PM: cube ink = 125% of S cap. viewBox ink is 13/26 of height.
+   S cap ~0.70em, so ink 0.875em, frame height 1.75em. Gap 10px, a little more than the tight 4px. */
+.mark {
+  gap: 10px;
+  align-items: center;
+  font-size: 20px;
+}
+.mark svg.cube,
+.mark .cube {
+  width: 1.62em !important;
+  height: 1.75em !important;
+  display: block;
+}
+.wordmark {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.stage-art { display: none !important; }
+.stage-brand { display: none !important; }
+.stage-bullets { display: none !important; }
+
+.orbit {
+  position: absolute;
+  inset: 8% 6%;
+  border: 1px solid rgba(255, 106, 0, 0.45);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.orbit-nodes {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 4;
+}
+.orbit-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(var(--a)) translateY(-46%) rotate(calc(var(--a) * -1));
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: #000;
+  color: var(--paper);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.valuebar-label { text-transform: none; letter-spacing: 0.02em; justify-content: center; text-align: center; }
+
+#fulfillment .split-media img,
+.split:has(#fulfillment) img,
+section#fulfillment img {
+  filter: saturate(1.08) sepia(0.18) contrast(1.04);
+}
+
+.inspo-head { max-width: none; }
+.inspo-title {
+  margin: 0;
+  color: var(--accent);
+  font-size: clamp(28px, 3vw, 40px);
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+.field textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--paper);
+  font-family: inherit;
+  font-size: 15px;
+  resize: vertical;
+}
+.map svg g[stroke] { stroke: #ff6a00; }
+
+/* ---------- craft pass: Apple press + Family settle + Asimov Terminal ---------- */
+
+.btn,
+.valuebar-item,
+.chips li,
+.nav-links a {
+  transition: transform 100ms ease-out, background 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn.is-pressed,
+.btn:active,
+.valuebar-item.is-pressed,
+.valuebar-item:active,
+.chips li:active,
+.nav-links a:active {
+  transform: scale(0.97);
+}
+
+.valuebar-item {
+  transition: transform 100ms ease-out, color 0.2s ease, background 0.2s ease;
+}
+
+/* Fly-not-teleport: shorter settle */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Quote success: in-place tray (height may change) */
+.form-card {
+  transition: min-height 0.35s ease-out;
+}
+
+.form-card.is-done form {
+  display: none;
+}
+
+.form-done {
+  display: none;
+}
+
+.form-done.is-visible {
+  display: block;
+  animation: tray-in 0.35s ease-out both;
+}
+
+@keyframes tray-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.btn.is-morphing {
+  pointer-events: none;
+}
+
+/* Capability stills: subtle media polish only (copy stays beside) */
+.split-media img {
+  transition: transform 0.35s ease-out, opacity 0.35s ease-out;
+}
+
+.split-media:hover img,
+.split-media:focus-within img {
+  transform: scale(1.02);
+  opacity: 0.94;
+}
+
+/* Asimov Terminal: inspo image-led. Rest = image. Hover/focus/press = dissolve + scrim */
+.inspo-card {
+  position: relative;
+  cursor: default;
+}
+
+.inspo-card img {
+  transition: opacity 80ms ease, filter 80ms ease;
+}
+
+.inspo-card figcaption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 22px 20px;
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--paper);
+  opacity: 0;
+  transition: opacity 80ms ease;
+  pointer-events: none;
+}
+
+.inspo-card figcaption strong {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.inspo-card figcaption span {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.45;
+  max-width: 36ch;
+}
+
+.inspo-card:hover img,
+.inspo-card:focus-visible img,
+.inspo-card.is-pressed img {
+  opacity: 0.85;
+  filter: brightness(0.72);
+}
+
+.inspo-card:hover figcaption,
+.inspo-card:focus-visible figcaption,
+.inspo-card.is-pressed figcaption {
+  opacity: 1;
+}
+
+@media (max-width: 860px) {
+  .inspo-card figcaption {
+    opacity: 1;
+    background: linear-gradient(
+      180deg,
+      transparent 35%,
+      rgba(0, 0, 0, 0.72) 100%
+    );
+  }
+  .inspo-card img {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn.is-pressed,
+  .btn:active,
+  .valuebar-item.is-pressed,
+  .valuebar-item:active,
+  .chips li:active,
+  .nav-links a:active {
+    transform: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .form-done.is-visible {
+    animation: none;
+  }
+  .split-media img,
+  .inspo-card img,
+  .inspo-card figcaption {
+    transition: none !important;
+  }
+  .inspo-card:hover img,
+  .inspo-card:focus-visible img,
+  .inspo-card.is-pressed img {
+    opacity: 1;
+    filter: none;
+  }
+  .inspo-card:hover figcaption,
+  .inspo-card:focus-visible figcaption,
+  .inspo-card.is-pressed figcaption {
+    opacity: 1;
+  }
+  @media (min-width: 861px) {
+    .inspo-card:not(:hover):not(:focus-visible) figcaption {
+      opacity: 0;
+    }
+  }
+}
