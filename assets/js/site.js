@@ -49,21 +49,27 @@
     }
   }
 
-
   /* Apple Design: feedback on pointer-down, not click. Critically damped settle. */
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.querySelectorAll(".btn").forEach(function (btn) {
-    btn.addEventListener("pointerdown", function () {
-      if (reduceMotion) return;
-      btn.classList.add("is-pressed");
+
+  function bindPress(selector) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      el.addEventListener("pointerdown", function () {
+        if (reduceMotion) return;
+        el.classList.add("is-pressed");
+      });
+      var clear = function () {
+        el.classList.remove("is-pressed");
+      };
+      el.addEventListener("pointerup", clear);
+      el.addEventListener("pointercancel", clear);
+      el.addEventListener("pointerleave", clear);
     });
-    var clear = function () {
-      btn.classList.remove("is-pressed");
-    };
-    btn.addEventListener("pointerup", clear);
-    btn.addEventListener("pointercancel", clear);
-    btn.addEventListener("pointerleave", clear);
-  });
+  }
+
+  bindPress(".btn");
+  bindPress(".valuebar-item");
+  bindPress(".inspo-card");
 
   var form = document.querySelector("[data-quote-form]");
   if (!form) {
@@ -72,6 +78,8 @@
 
   var done = document.querySelector("[data-quote-done]");
   var doneName = document.querySelector("[data-done-name]");
+  var card = form.closest(".form-card");
+  var submitBtn = form.querySelector('button[type="submit"]');
 
   var validators = {
     name: function (value) {
@@ -145,11 +153,27 @@
       doneName.textContent = values.name.split(" ")[0];
     }
 
-    form.hidden = true;
-    if (done) {
-      done.classList.add("is-visible");
-      done.setAttribute("tabindex", "-1");
-      done.focus();
+    if (submitBtn && !reduceMotion) {
+      submitBtn.classList.add("is-morphing");
+      submitBtn.textContent = "Sending";
+    }
+
+    var showTray = function () {
+      form.hidden = true;
+      if (card) {
+        card.classList.add("is-done");
+      }
+      if (done) {
+        done.classList.add("is-visible");
+        done.setAttribute("tabindex", "-1");
+        done.focus();
+      }
+    };
+
+    if (reduceMotion) {
+      showTray();
+    } else {
+      window.setTimeout(showTray, 180);
     }
 
     window.location.href =
