@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brand System | Shipfront</title>
+    <meta name="description" content="SHIPFRONT / BRAND SYSTEM / 14 SEP 2026" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 26'%3E%3Cg stroke='%23FF6A00' stroke-width='1.1' stroke-linecap='butt' stroke-linejoin='miter' stroke-miterlimit='10'%3E%3Cpath d='M12,6L17.629,9.25L17.629,15.75L12,19L6.371,15.75L6.371,9.25Z' fill='%23000'/%3E%3Cpath d='M6.371,9.25L12,12.5L17.629,9.25' fill='none'/%3E%3Cpath d='M12,12.5L12,19' fill='none'/%3E%3C/g%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <style>
+      .mark { gap: 10px; align-items: center; }
+      .mark svg.cube, .mark .cube { width: 1.62em !important; height: 1.75em !important; }
+      .bb-meta { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 14px; }
+      .bb-meta b { color: var(--accent); font-weight: 700; }
+      .bb-section { padding: 64px 0; border-top: 1px solid var(--line-soft); }
+      .bb-section h2 { font-size: clamp(22px, 3vw, 28px); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+      .bb-meaning { color: var(--muted); font-size: 15px; max-width: 52ch; margin-bottom: 28px; }
+      .bb-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px 16px; }
+      .bb-cell { margin: 0; }
+      .bb-cell--leader .bb-plate { border-color: var(--accent); }
+      .bb-plate { border: 1px solid var(--line); border-radius: 12px; background: #000; min-height: 148px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 20px 12px; }
+      .bb-plate--ramp { min-height: 160px; overflow: hidden; }
+      .bb-plate--lock { min-height: 120px; }
+      .bb-wm { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--paper); }
+      .bb-label { margin-top: 10px; display: flex; flex-direction: column; gap: 2px; }
+      .bb-code { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--paper); }
+      .bb-sub { font-size: 12px; color: var(--muted-2); }
+      .bb-leader { margin-top: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+      .bb-ramp { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; align-items: end; }
+      .bb-ramp-item { margin: 0; }
+      .bb-lockups { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+      .bb-vertical { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+      .bb-fav { width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 8px; display: grid; place-items: center; overflow: hidden; background: #000; }
+      .bb-unused { border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; background: #050505; }
+      .bb-unused ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+      .bb-unused li { display: flex; gap: 12px; align-items: baseline; font-size: 14px; color: var(--muted); }
+      .bb-unused .tag { flex: none; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); }
+      .bb-change { margin-top: 18px; color: var(--muted); font-size: 14px; max-width: 62ch; }
+      .bb-change strong { color: var(--paper); font-weight: 600; }
+      @media (max-width: 1080px) {
+        .bb-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .bb-ramp, .bb-lockups { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      }
+      @media (max-width: 620px) {
+        .bb-grid, .bb-ramp, .bb-lockups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="shell nav">
+        <a class="mark" href="index.html" aria-label="Shipfront home">
+          <svg class="cube" width="36" height="40" viewBox="0 0 24 26" aria-hidden="true">
+            <path class="hex" d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" />
+            <path class="edge" d="M6.371 9.25 L12 12.5 L17.629 9.25" />
+            <path class="edge" d="M12 12.5 L12 19" />
+          </svg>
+          <span class="wordmark">SHIPFRONT</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html#why">Why Shipfront</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+          <a class="btn btn-primary" href="get-a-quote.html">Get a Quote</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="shell">
+          <p class="bb-meta">SHIPFRONT <b>/</b> BRAND SYSTEM <b>/</b> 14 SEP 2026</p>
+          <h1>Brand system</h1>
+          <p>Cube and orbit families on the Terminal plate. Labels sit outside the cells. Leader is 1A, the live mark.</p>
+        </div>
+      </section>
+
+      <section class="bb-section" id="cube">
+        <div class="shell">
+          <h2>Section I - The Cube</h2>
+          <p class="bb-meaning">A crate seen in isometric space; the unit of fulfillment.</p>
+          <div class="bb-grid"><figure class="bb-cell bb-cell--leader"><div class="bb-plate"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.1" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg><span class="bb-wm">SHIPFRONT</span></div><figcaption class="bb-label"><span class="bb-code">1A WEIGHT</span><span class="bb-sub">Live</span><span class="bb-leader">Leader</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg><span class="bb-wm">SHIPFRONT</span></div><figcaption class="bb-label"><span class="bb-code">1B WIRE</span><span class="bb-sub">Outline</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.85"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.85"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.85"/></svg><span class="bb-wm">SHIPFRONT</span></div><figcaption class="bb-label"><span class="bb-code">1C HEAVY</span><span class="bb-sub">Bold</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="0.55"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="0.55"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="0.55"/></svg><span class="bb-wm">SHIPFRONT</span></div><figcaption class="bb-label"><span class="bb-code">1D HAIRLINE</span><span class="bb-sub">Thin</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#FF6A00" stroke="none"/></svg><span class="bb-wm">SHIPFRONT</span></div><figcaption class="bb-label"><span class="bb-code">1E FILL</span><span class="bb-sub">Solid</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><path d="M6.371 15.75 L12 12.5" fill="none" stroke="#FF6A00" stroke-width="0.7" stroke-dasharray="1.2 1.4" opacity="0.55"/><path d="M17.629 15.75 L12 12.5" fill="none" stroke="#FF6A00" stroke-width="0.7" stroke-dasharray="1.2 1.4" opacity="0.55"/><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.1"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg><span class="bb-wm">SHIPFRONT</span></div><figcaption class="bb-label"><span class="bb-code">1F BACK</span><span class="bb-sub">Depth</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><g transform="translate(12 13) scale(0.78) translate(-12 -13)"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.25"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.25"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.25"/></g></svg><span class="bb-wm">SHIPFRONT</span></div><figcaption class="bb-label"><span class="bb-code">1G OPEN</span><span class="bb-sub">Air</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><g transform="translate(12 13) scale(1.12) translate(-12 -13)"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.0"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.0"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.0"/></g></svg><span class="bb-wm">SHIPFRONT</span></div><figcaption class="bb-label"><span class="bb-code">1H TIGHT</span><span class="bb-sub">Crop</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.4"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="0.9" opacity="0.85"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="0.9" opacity="0.85"/></svg><span class="bb-wm">SHIPFRONT</span></div><figcaption class="bb-label"><span class="bb-code">1I SOLID</span><span class="bb-sub">Mass</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="none" stroke="#FF6A00" stroke-width="0.9" opacity="0.4"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="0.9" opacity="0.4"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="0.9" opacity="0.4"/></svg><span class="bb-wm">SHIPFRONT</span></div><figcaption class="bb-label"><span class="bb-code">1J GHOST</span><span class="bb-sub">Soft</span></figcaption></figure></div>
+        </div>
+      </section>
+
+      <section class="bb-section" id="orbit">
+        <div class="shell">
+          <h2>Section II - The Orbit Ring</h2>
+          <p class="bb-meaning">Services arranged as a dock around the crate.</p>
+          <div class="bb-grid"><figure class="bb-cell"><div class="bb-plate"><svg class="bb-orbit" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="#FF6A00" stroke-width="1.2"/><circle cx="50.00" cy="12.00" r="3.2" fill="#FF6A00"/><circle cx="86.14" cy="38.26" r="3.2" fill="#FF6A00"/><circle cx="72.34" cy="80.74" r="3.2" fill="#FF6A00"/><circle cx="27.66" cy="80.74" r="3.2" fill="#FF6A00"/><circle cx="13.86" cy="38.26" r="3.2" fill="#FF6A00"/></svg></div><figcaption class="bb-label"><span class="bb-code">2A SOLID</span><span class="bb-sub">Ring</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-orbit" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="#FF6A00" stroke-width="1.2" stroke-dasharray="3 5"/><circle cx="50.00" cy="12.00" r="3.2" fill="#FF6A00"/><circle cx="86.14" cy="38.26" r="3.2" fill="#FF6A00"/><circle cx="72.34" cy="80.74" r="3.2" fill="#FF6A00"/><circle cx="27.66" cy="80.74" r="3.2" fill="#FF6A00"/><circle cx="13.86" cy="38.26" r="3.2" fill="#FF6A00"/></svg></div><figcaption class="bb-label"><span class="bb-code">2B DASHED</span><span class="bb-sub">Pace</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-orbit" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="#FF6A00" stroke-width="0.8" opacity="0.5"/><line x1="85.00" y1="50.00" x2="91.00" y2="50.00" stroke="#FF6A00" stroke-width="1"/><line x1="83.81" y1="59.06" x2="89.60" y2="60.61" stroke="#FF6A00" stroke-width="1"/><line x1="80.31" y1="67.50" x2="85.51" y2="70.50" stroke="#FF6A00" stroke-width="1"/><line x1="74.75" y1="74.75" x2="78.99" y2="78.99" stroke="#FF6A00" stroke-width="1"/><line x1="67.50" y1="80.31" x2="70.50" y2="85.51" stroke="#FF6A00" stroke-width="1"/><line x1="59.06" y1="83.81" x2="60.61" y2="89.60" stroke="#FF6A00" stroke-width="1"/><line x1="50.00" y1="85.00" x2="50.00" y2="91.00" stroke="#FF6A00" stroke-width="1"/><line x1="40.94" y1="83.81" x2="39.39" y2="89.60" stroke="#FF6A00" stroke-width="1"/><line x1="32.50" y1="80.31" x2="29.50" y2="85.51" stroke="#FF6A00" stroke-width="1"/><line x1="25.25" y1="74.75" x2="21.01" y2="78.99" stroke="#FF6A00" stroke-width="1"/><line x1="19.69" y1="67.50" x2="14.49" y2="70.50" stroke="#FF6A00" stroke-width="1"/><line x1="16.19" y1="59.06" x2="10.40" y2="60.61" stroke="#FF6A00" stroke-width="1"/><line x1="15.00" y1="50.00" x2="9.00" y2="50.00" stroke="#FF6A00" stroke-width="1"/><line x1="16.19" y1="40.94" x2="10.40" y2="39.39" stroke="#FF6A00" stroke-width="1"/><line x1="19.69" y1="32.50" x2="14.49" y2="29.50" stroke="#FF6A00" stroke-width="1"/><line x1="25.25" y1="25.25" x2="21.01" y2="21.01" stroke="#FF6A00" stroke-width="1"/><line x1="32.50" y1="19.69" x2="29.50" y2="14.49" stroke="#FF6A00" stroke-width="1"/><line x1="40.94" y1="16.19" x2="39.39" y2="10.40" stroke="#FF6A00" stroke-width="1"/><line x1="50.00" y1="15.00" x2="50.00" y2="9.00" stroke="#FF6A00" stroke-width="1"/><line x1="59.06" y1="16.19" x2="60.61" y2="10.40" stroke="#FF6A00" stroke-width="1"/><line x1="67.50" y1="19.69" x2="70.50" y2="14.49" stroke="#FF6A00" stroke-width="1"/><line x1="74.75" y1="25.25" x2="78.99" y2="21.01" stroke="#FF6A00" stroke-width="1"/><line x1="80.31" y1="32.50" x2="85.51" y2="29.50" stroke="#FF6A00" stroke-width="1"/><line x1="83.81" y1="40.94" x2="89.60" y2="39.39" stroke="#FF6A00" stroke-width="1"/><circle cx="50.00" cy="12.00" r="2.4" fill="#FF6A00"/><circle cx="86.14" cy="38.26" r="2.4" fill="#FF6A00"/><circle cx="72.34" cy="80.74" r="2.4" fill="#FF6A00"/><circle cx="27.66" cy="80.74" r="2.4" fill="#FF6A00"/><circle cx="13.86" cy="38.26" r="2.4" fill="#FF6A00"/></svg></div><figcaption class="bb-label"><span class="bb-code">2C TICKS</span><span class="bb-sub">Clock</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-orbit" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="#FF6A00" stroke-width="1"/><rect x="44.00" y="9.80" width="12" height="4.4" rx="2.2" fill="#FF6A00"/><rect x="80.14" y="36.06" width="12" height="4.4" rx="2.2" fill="#FF6A00"/><rect x="66.34" y="78.54" width="12" height="4.4" rx="2.2" fill="#FF6A00"/><rect x="21.66" y="78.54" width="12" height="4.4" rx="2.2" fill="#FF6A00"/><rect x="7.86" y="36.06" width="12" height="4.4" rx="2.2" fill="#FF6A00"/></svg></div><figcaption class="bb-label"><span class="bb-code">2D PILLS</span><span class="bb-sub">Nodes</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-orbit" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="#FF6A00" stroke-width="1" opacity="0.55"/><circle cx="50.00" cy="12.00" r="3.6" fill="#FF6A00"/><circle cx="72.34" cy="80.74" r="3.6" fill="#FF6A00"/><circle cx="13.86" cy="38.26" r="3.6" fill="#FF6A00"/></svg></div><figcaption class="bb-label"><span class="bb-code">2E SPARSE</span><span class="bb-sub">Quiet</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-orbit" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><circle cx="88.00" cy="50.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="87.42" cy="56.60" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="85.71" cy="63.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="82.91" cy="69.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="79.11" cy="74.43" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="74.43" cy="79.11" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="69.00" cy="82.91" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="63.00" cy="85.71" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="56.60" cy="87.42" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="50.00" cy="88.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="43.40" cy="87.42" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="37.00" cy="85.71" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="31.00" cy="82.91" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="25.57" cy="79.11" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="20.89" cy="74.43" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="17.09" cy="69.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="14.29" cy="63.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="12.58" cy="56.60" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="12.00" cy="50.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="12.58" cy="43.40" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="14.29" cy="37.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="17.09" cy="31.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="20.89" cy="25.57" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="25.57" cy="20.89" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="31.00" cy="17.09" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="37.00" cy="14.29" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="43.40" cy="12.58" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="50.00" cy="12.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="56.60" cy="12.58" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="63.00" cy="14.29" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="69.00" cy="17.09" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="74.43" cy="20.89" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="79.11" cy="25.57" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="82.91" cy="31.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="85.71" cy="37.00" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="87.42" cy="43.40" r="1.1" fill="#FF6A00" opacity="0.55"/><circle cx="50.00" cy="12.00" r="3.2" fill="#FF6A00"/><circle cx="86.14" cy="38.26" r="3.2" fill="#FF6A00"/><circle cx="72.34" cy="80.74" r="3.2" fill="#FF6A00"/><circle cx="27.66" cy="80.74" r="3.2" fill="#FF6A00"/><circle cx="13.86" cy="38.26" r="3.2" fill="#FF6A00"/></svg></div><figcaption class="bb-label"><span class="bb-code">2F DOTS</span><span class="bb-sub">Bead</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-orbit" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="none" stroke="#FF6A00" stroke-width="0.9" opacity="0.45"/><circle cx="50" cy="50" r="34" fill="none" stroke="#FF6A00" stroke-width="1.1"/><circle cx="50.00" cy="16.00" r="2.8" fill="#FF6A00"/><circle cx="82.34" cy="39.49" r="2.8" fill="#FF6A00"/><circle cx="69.98" cy="77.51" r="2.8" fill="#FF6A00"/><circle cx="30.02" cy="77.51" r="2.8" fill="#FF6A00"/><circle cx="17.66" cy="39.49" r="2.8" fill="#FF6A00"/></svg></div><figcaption class="bb-label"><span class="bb-code">2G DOUBLE</span><span class="bb-sub">Lane</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-orbit" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><path d="M50 12 A38 38 0 0 1 86.1 61.8" fill="none" stroke="#FF6A00" stroke-width="1.2"/><path d="M86.1 61.8 A38 38 0 0 1 38.2 84.7" fill="none" stroke="#FF6A00" stroke-width="1.2" opacity="0.45"/><path d="M38.2 84.7 A38 38 0 0 1 13.9 61.8" fill="none" stroke="#FF6A00" stroke-width="1.2"/><path d="M13.9 61.8 A38 38 0 0 1 50 12" fill="none" stroke="#FF6A00" stroke-width="1.2" opacity="0.45"/><circle cx="50.00" cy="12.00" r="3.2" fill="#FF6A00"/><circle cx="86.14" cy="38.26" r="3.2" fill="#FF6A00"/><circle cx="72.34" cy="80.74" r="3.2" fill="#FF6A00"/><circle cx="27.66" cy="80.74" r="3.2" fill="#FF6A00"/><circle cx="13.86" cy="38.26" r="3.2" fill="#FF6A00"/></svg></div><figcaption class="bb-label"><span class="bb-code">2H ARC</span><span class="bb-sub">Gap</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-orbit" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="#FF6A00" stroke-width="1"/><line x1="47.00" y1="12.00" x2="53.00" y2="12.00" stroke="#FF6A00" stroke-width="1.2"/><line x1="50.00" y1="9.00" x2="50.00" y2="15.00" stroke="#FF6A00" stroke-width="1.2"/><line x1="83.14" y1="38.26" x2="89.14" y2="38.26" stroke="#FF6A00" stroke-width="1.2"/><line x1="86.14" y1="35.26" x2="86.14" y2="41.26" stroke="#FF6A00" stroke-width="1.2"/><line x1="69.34" y1="80.74" x2="75.34" y2="80.74" stroke="#FF6A00" stroke-width="1.2"/><line x1="72.34" y1="77.74" x2="72.34" y2="83.74" stroke="#FF6A00" stroke-width="1.2"/><line x1="24.66" y1="80.74" x2="30.66" y2="80.74" stroke="#FF6A00" stroke-width="1.2"/><line x1="27.66" y1="77.74" x2="27.66" y2="83.74" stroke="#FF6A00" stroke-width="1.2"/><line x1="10.86" y1="38.26" x2="16.86" y2="38.26" stroke="#FF6A00" stroke-width="1.2"/><line x1="13.86" y1="35.26" x2="13.86" y2="41.26" stroke="#FF6A00" stroke-width="1.2"/></svg></div><figcaption class="bb-label"><span class="bb-code">2I CROSS</span><span class="bb-sub">Mark</span></figcaption></figure><figure class="bb-cell"><div class="bb-plate"><svg class="bb-orbit" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><rect x="44.00" y="9.80" width="12" height="4.4" rx="2.2" fill="#FF6A00"/><rect x="80.14" y="36.06" width="12" height="4.4" rx="2.2" fill="#FF6A00"/><rect x="66.34" y="78.54" width="12" height="4.4" rx="2.2" fill="#FF6A00"/><rect x="21.66" y="78.54" width="12" height="4.4" rx="2.2" fill="#FF6A00"/><rect x="7.86" y="36.06" width="12" height="4.4" rx="2.2" fill="#FF6A00"/><circle cx="50" cy="50" r="6" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg></div><figcaption class="bb-label"><span class="bb-code">2J BARE</span><span class="bb-sub">Dock</span></figcaption></figure></div>
+        </div>
+      </section>
+
+      <section class="bb-section" id="ramp">
+        <div class="shell">
+          <h2>Size ramp</h2>
+          <p class="bb-meaning">Leader 1A at 512, 256, 128, 32, 16. Optical redraw at 16.</p>
+          <div class="bb-ramp"><figure class="bb-ramp-item"><div class="bb-plate bb-plate--ramp"><div style="transform:scale(0.3515625);transform-origin:center center"><svg class="bb-cube" viewBox="0 0 24 26" width="512" height="554" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.1"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg></div></div><figcaption class="bb-label"><span class="bb-code">512</span></figcaption></figure><figure class="bb-ramp-item"><div class="bb-plate bb-plate--ramp"><div style="transform:scale(0.703125);transform-origin:center center"><svg class="bb-cube" viewBox="0 0 24 26" width="256" height="277" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.1"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg></div></div><figcaption class="bb-label"><span class="bb-code">256</span></figcaption></figure><figure class="bb-ramp-item"><div class="bb-plate bb-plate--ramp"><svg class="bb-cube" viewBox="0 0 24 26" width="128" height="138" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.1"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg></div><figcaption class="bb-label"><span class="bb-code">128</span></figcaption></figure><figure class="bb-ramp-item"><div class="bb-plate bb-plate--ramp"><svg class="bb-cube" viewBox="0 0 24 26" width="32" height="34" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.1"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg></div><figcaption class="bb-label"><span class="bb-code">32</span></figcaption></figure><figure class="bb-ramp-item"><div class="bb-plate bb-plate--ramp"><svg class="bb-cube" viewBox="0 0 24 26" width="16" height="17" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.6"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.6"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.6"/></svg></div><figcaption class="bb-label"><span class="bb-code">16</span><span class="bb-sub">Optical redraw</span></figcaption></figure></div>
+        </div>
+      </section>
+
+      <section class="bb-section" id="lockups">
+        <div class="shell">
+          <h2>Lockups</h2>
+          <p class="bb-meaning">Horizontal 1, horizontal 2 compact, vertical, favicon crop.</p>
+          <div class="bb-lockups">
+<figure class="bb-cell"><div class="bb-plate bb-plate--lock"><div class="mark"><svg class="bb-cube" viewBox="0 0 24 26" width="36" height="40" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.1" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg><span class="wordmark">SHIPFRONT</span></div></div><figcaption class="bb-label"><span class="bb-code">Horizontal 1</span><span class="bb-sub">Cube + word</span></figcaption></figure>
+<figure class="bb-cell"><div class="bb-plate bb-plate--lock"><div class="mark" style="gap:6px"><svg class="bb-cube" viewBox="0 0 24 26" width="28" height="30" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.1" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg><span class="wordmark" style="font-size:16px">SHIPFRONT</span></div></div><figcaption class="bb-label"><span class="bb-code">Horizontal 2</span><span class="bb-sub">Compact</span></figcaption></figure>
+<figure class="bb-cell"><div class="bb-plate bb-plate--lock"><div class="bb-vertical"><svg class="bb-cube" viewBox="0 0 24 26" width="72" height="78" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.1" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg><span class="bb-wm">SHIPFRONT</span></div></div><figcaption class="bb-label"><span class="bb-code">Vertical</span><span class="bb-sub">Stacked</span></figcaption></figure>
+<figure class="bb-cell"><div class="bb-plate bb-plate--lock"><div class="bb-fav"><svg class="bb-cube" viewBox="0 0 24 26" width="32" height="35" aria-hidden="true"><path d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" fill="#000" stroke="#FF6A00" stroke-width="1.1" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M6.371 9.25 L12 12.5 L17.629 9.25" fill="none" stroke="#FF6A00" stroke-width="1.1"/><path d="M12 12.5 L12 19" fill="none" stroke="#FF6A00" stroke-width="1.1"/></svg></div></div><figcaption class="bb-label"><span class="bb-code">Favicon</span><span class="bb-sub">Crop</span></figcaption></figure>
+</div>
+        </div>
+      </section>
+
+      <section class="bb-section" id="appendix">
+        <div class="shell">
+          <h2>Appendix unused</h2>
+          <div class="bb-unused">
+            <ul>
+              <li><span class="tag">UNUSED</span> Hanging ship / stage-art</li>
+              <li><span class="tag">UNUSED</span> Six-node orbit</li>
+              <li><span class="tag">UNUSED</span> 150% of S cube scale</li>
+            </ul>
+            <p class="bb-change"><strong>What would change the pick:</strong> fails the 16px wire test; Kunal wants the ring as the mark; stroke collapses at favicon; orbit reads as a second logo.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="footer-top">
+          <div>
+            <a class="mark" href="index.html" aria-label="Shipfront home">
+              <svg class="cube" width="36" height="40" viewBox="0 0 24 26" aria-hidden="true">
+                <path class="hex" d="M12 6 L17.629 9.25 L17.629 15.75 L12 19 L6.371 15.75 L6.371 9.25 Z" />
+                <path class="edge" d="M6.371 9.25 L12 12.5 L17.629 9.25" />
+                <path class="edge" d="M12 12.5 L12 19" />
+              </svg>
+              <span class="wordmark">SHIPFRONT</span>
+            </a>
+            <p>Shipfront. eCommerce at Scale.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Site</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="get-a-quote.html">Get a Quote</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="brand-board.html">Brand</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><span>1933 S. Broadway, Los Angeles CA 90007</span></li>
+              <li><a href="mailto:info@myshipfront.com">info@myshipfront.com</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span class="built">Built by <b>David T Phung</b></span>
+          <span class="stamp">14 SEP 2026</span>
+        </div>
+      </div>
+    </footer>
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>
