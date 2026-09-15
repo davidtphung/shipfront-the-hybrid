@@ -1658,7 +1658,7 @@ section {
 
 .orbit {
   position: absolute;
-  inset: 8% 6%;
+  inset: 2%;
   border: 1px solid rgba(255, 106, 0, 0.45);
   border-radius: 50%;
   pointer-events: none;
@@ -1675,17 +1675,29 @@ section {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) rotate(var(--a)) translateY(-46%) rotate(calc(var(--a) * -1));
+  width: 0;
+  height: 0;
   margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: rotate(var(--a)) translateY(-58%) rotate(calc(var(--a) * -1));
+}
+.orbit-node span {
+  display: inline-block;
+  transform: translate(-50%, -50%);
   padding: 6px 10px;
   border: 1px solid var(--accent);
   border-radius: 999px;
   background: #000;
   color: var(--paper);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
+  letter-spacing: 0.02em;
+  max-width: 11em;
+  text-align: center;
+  white-space: normal;
+  line-height: 1.2;
 }
 .valuebar-label { text-transform: none; letter-spacing: 0.02em; justify-content: center; text-align: center; }
 
