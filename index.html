@@ -27,14 +27,14 @@
       .valuebar-label { justify-content: center; text-align: center; }
       .mark svg.cube, .mark .cube { width: 1.62em !important; height: 1.75em !important; }
 
-      /* Five nodes orbit the hero box. Static. Equally spaced. Clockwise from top. */
+      /* Six words orbit the hero box. Evenly spaced. Clockwise from top. Clear of the cube. */
       .stage { overflow: visible; }
       .stage .orbit {
         position: absolute;
-        left: 8%;
-        right: 8%;
-        top: 10%;
-        bottom: 10%;
+        left: 2%;
+        right: 2%;
+        top: 2%;
+        bottom: 2%;
         border: 1px solid rgba(255, 106, 0, 0.5);
         border-radius: 50%;
         pointer-events: none;
@@ -55,7 +55,7 @@
         width: 0;
         height: 0;
         margin: 0;
-        transform: rotate(var(--a)) translateY(-46%) rotate(calc(var(--a) * -1));
+        transform: rotate(var(--a)) translateY(-58%) rotate(calc(var(--a) * -1));
       }
       .orbit-node span {
         display: inline-block;
@@ -68,12 +68,16 @@
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.02em;
-        white-space: nowrap;
+        max-width: 11em;
+        text-align: center;
+        white-space: normal;
+        line-height: 1.2;
       }
       .stage-art, .stage-brand, .stage-bullets { display: none !important; }
       @media (max-width: 860px) {
-        .orbit-node { font-size: 11px; padding: 5px 8px; }
-        .stage .orbit { left: 4%; right: 4%; top: 8%; bottom: 8%; }
+        .orbit-node span { font-size: 11px; padding: 5px 8px; max-width: 9em; }
+        .stage .orbit { left: 0; right: 0; top: 0; bottom: 0; }
+        .orbit-node { transform: rotate(var(--a)) translateY(-56%) rotate(calc(var(--a) * -1)); }
       }
     </style>
   </head>
@@ -165,10 +169,11 @@
             </svg>
             <ol class="orbit-nodes" aria-label="Shipfront services">
               <li class="orbit-node" style="--a: -90deg"><span>Inbound</span></li>
-              <li class="orbit-node" style="--a: -18deg"><span>Storage</span></li>
-              <li class="orbit-node" style="--a: 54deg"><span>Inventory management</span></li>
-              <li class="orbit-node" style="--a: 126deg"><span>Kitting / special projects</span></li>
-              <li class="orbit-node" style="--a: 198deg"><span>Fulfillment</span></li>
+              <li class="orbit-node" style="--a: -30deg"><span>Storage</span></li>
+              <li class="orbit-node" style="--a: 30deg"><span>Inventory management</span></li>
+              <li class="orbit-node" style="--a: 90deg"><span>Kitting</span></li>
+              <li class="orbit-node" style="--a: 150deg"><span>Special projects</span></li>
+              <li class="orbit-node" style="--a: 210deg"><span>Fulfillment</span></li>
             </ol>
           </div>
         </div>
