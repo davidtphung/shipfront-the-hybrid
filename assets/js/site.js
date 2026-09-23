@@ -1,13 +1,23 @@
 (function () {
   "use strict";
 
+  var lenis = new Lenis({
+    autoRaf: true,
+    lerp: 0.1,
+    smoothWheel: true,
+    anchors: true,
+    respectReducedMotion: true,
+    stopInertiaOnNavigate: true,
+  });
+
   var header = document.querySelector(".site-header");
   if (header) {
-    var onScroll = function () {
-      header.classList.toggle("is-stuck", window.scrollY > 4);
+    var onScroll = function (e) {
+      var scrollY = e ? e.scroll : lenis.scroll;
+      header.classList.toggle("is-stuck", scrollY > 4);
     };
     onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    lenis.on("scroll", onScroll);
   }
 
   var toggle = document.querySelector(".nav-toggle");
