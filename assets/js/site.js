@@ -52,10 +52,10 @@
   /* Apple Design: feedback on pointer-down, not click. Critically damped settle. */
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* Reduced motion swaps the scale for an opacity dip in CSS, so the class is always set. */
   function bindPress(selector) {
     document.querySelectorAll(selector).forEach(function (el) {
       el.addEventListener("pointerdown", function () {
-        if (reduceMotion) return;
         el.classList.add("is-pressed");
       });
       var clear = function () {
@@ -68,8 +68,17 @@
   }
 
   bindPress(".btn");
+  bindPress(".nav-toggle");
+  bindPress(".nav-links a");
   bindPress(".valuebar-item");
+  bindPress(".chips li");
+  bindPress(".footer-col a");
+  bindPress(".contact-card a.big");
   bindPress(".inspo-card");
+  bindPress(".split");
+  bindPress(".contact-card");
+  bindPress(".trust-card");
+  bindPress(".step");
 
   var form = document.querySelector("[data-quote-form]");
   if (!form) {
