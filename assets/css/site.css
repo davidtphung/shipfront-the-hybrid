@@ -1504,18 +1504,6 @@ section {
   background: var(--card, #0a0a0a);
 }
 
-.split-flip {
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-}
-
-.split-flip .split-media {
-  order: 2;
-}
-
-.split-flip .split-copy {
-  order: 1;
-}
-
 .split-media {
   margin: 0;
   overflow: hidden;
@@ -1550,15 +1538,10 @@ section {
 }
 
 @media (max-width: 860px) {
-  .split,
-  .split-flip {
+  .split {
     grid-template-columns: 1fr;
     padding: 18px;
     gap: 18px;
-  }
-  .split-flip .split-media,
-  .split-flip .split-copy {
-    order: initial;
   }
   /* mobile: image first, then text */
   .split-media {
@@ -1877,17 +1860,6 @@ section#fulfillment img {
 
 .btn.is-morphing {
   pointer-events: none;
-}
-
-/* Capability stills: subtle media polish only (copy stays beside) */
-.split-media img {
-  transition: transform 0.35s ease-out, opacity 0.35s ease-out;
-}
-
-.split-media:hover img,
-.split-media:focus-within img {
-  transform: scale(1.02);
-  opacity: 0.94;
 }
 
 /* Asimov Terminal: inspo image-led. Rest = image. Hover/focus/press = dissolve + scrim */
