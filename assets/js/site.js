@@ -89,6 +89,10 @@
   var doneName = document.querySelector("[data-done-name]");
   var card = form.closest(".form-card");
   var submitBtn = form.querySelector('button[type="submit"]');
+  /* Repeat submits inside this window are dropped so the mail app opens once.
+     The button keeps its press feedback; no disabled state or pointer lock. */
+  var SUBMIT_GUARD_MS = 1500;
+  var lastSubmitAt = -Infinity;
 
   var validators = {
     name: function (value) {
@@ -131,6 +135,10 @@
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
+    if (Date.now() - lastSubmitAt < SUBMIT_GUARD_MS) {
+      return;
+    }
+
     var inputs = Array.prototype.slice.call(form.querySelectorAll("input, textarea"));
     var valid = inputs.map(check).every(Boolean);
 
@@ -141,6 +149,8 @@
       }
       return;
     }
+
+    lastSubmitAt = Date.now();
 
     var values = {};
     inputs.forEach(function (input) {
