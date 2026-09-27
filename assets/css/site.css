@@ -139,19 +139,6 @@ p {
   letter-spacing: 0.04em;
   color: var(--paper);
   line-height: 1;
-  position: relative;
-  padding-bottom: 6px;
-}
-
-.wordmark::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--accent);
-  border-radius: 2px;
 }
 
 /* ---------- header ---------- */
@@ -1691,17 +1678,19 @@ section {
 
 
 /* ---------- kunal 8 sep live ---------- */
-/* Kunal pick 8 Sep 9:49 PM: cube ink = 125% of S cap. viewBox ink is 13/26 of height.
-   S cap ~0.70em, so ink 0.875em, frame height 1.75em. Gap 10px, a little more than the tight 4px. */
+/* Kunal 26 Sep: painted cube ink (paths plus stroke and miters) is 14.27/26 of the frame
+   height; ink right edge sits 5.821/24 of the width inside the frame. S ink is 0.7345em
+   tall with a 0.0312em left bearing. Ink 1.5 x 0.7345em: frame 2.007em x 1.853em.
+   Visible ink to S gap 12px: 12px minus 0.449em frame padding minus 0.031em bearing. */
 .mark {
-  gap: 10px;
+  gap: calc(12px - 0.481em);
   align-items: center;
   font-size: 20px;
 }
 .mark svg.cube,
 .mark .cube {
-  width: 1.62em !important;
-  height: 1.75em !important;
+  width: 1.853em !important;
+  height: 2.007em !important;
   display: block;
 }
 .wordmark {
@@ -1709,17 +1698,17 @@ section {
   line-height: 1;
 }
 
-.stage-art { display: none !important; }
+/* Step the lockup down on phones so the bigger cube keeps the nav inside 390. */
+@media (max-width: 620px) {
+  .mark,
+  .wordmark {
+    font-size: 17px;
+  }
+}
+
 .stage-brand { display: none !important; }
 .stage-bullets { display: none !important; }
 
-.orbit {
-  position: absolute;
-  inset: 6%;
-  border: 1px solid rgba(255, 106, 0, 0.45);
-  border-radius: 50%;
-  pointer-events: none;
-}
 .orbit-nodes {
   position: absolute;
   inset: 0;
