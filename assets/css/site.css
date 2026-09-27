@@ -1678,17 +1678,19 @@ section {
 
 
 /* ---------- kunal 8 sep live ---------- */
-/* Kunal 26 Sep: viewBox ink is 13/26 of height.
-   150% of S cap: ink 1.05em, frame 2.1em. Gap 12px. */
+/* Kunal 26 Sep: painted cube ink (paths plus stroke and miters) is 14.27/26 of the frame
+   height; ink right edge sits 5.821/24 of the width inside the frame. S ink is 0.7345em
+   tall with a 0.0312em left bearing. Ink 1.5 x 0.7345em: frame 2.007em x 1.853em.
+   Visible ink to S gap 12px: 12px minus 0.449em frame padding minus 0.031em bearing. */
 .mark {
-  gap: 12px;
+  gap: calc(12px - 0.481em);
   align-items: center;
   font-size: 20px;
 }
 .mark svg.cube,
 .mark .cube {
-  width: 1.94em !important;
-  height: 2.1em !important;
+  width: 1.853em !important;
+  height: 2.007em !important;
   display: block;
 }
 .wordmark {
