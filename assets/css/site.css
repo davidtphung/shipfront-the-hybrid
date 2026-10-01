@@ -1642,8 +1642,8 @@ section {
 /* Kunal 26 Sep: painted cube ink (paths plus stroke and miters) is 14.27/26 of the frame
    height; ink right edge sits 5.821/24 of the width inside the frame. S ink is 0.7345em
    tall with a 0.0312em left bearing. Ink 1.5 x 0.7345em: frame 2.007em x 1.853em.
-   Visible ink to S gap 8px (Kunal 30 Sep, was 12px): 8px minus 0.449em frame padding
-   minus 0.031em bearing. */
+   Visible ink to S gap 0.203em of the wordmark, per the board 'Bigger. 150% of S'
+   (13px at a 64px wordmark): 0.203em minus 0.449em frame padding minus 0.031em bearing. */
 .mark {
   gap: 0;
   align-items: center;
@@ -1658,7 +1658,7 @@ section {
 .wordmark {
   font-size: 20px;
   line-height: 1;
-  margin-left: calc(8px - 0.481em);
+  margin-left: calc(0.203em - 0.481em);
 }
 
 /* Step the lockup down on phones so the bigger cube keeps the nav inside 390. */
