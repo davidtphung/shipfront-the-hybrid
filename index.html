@@ -28,10 +28,11 @@
       .valuebar-label { justify-content: center; text-align: center; }
       .mark svg.cube, .mark .cube { width: 1.853em !important; height: 2.007em !important; }
 
-      /* Kunal 26 Sep: 3D orbit back. Floor rings plus tilted dashed orbit.
-         Six chips clockwise from top left, the two mid chips ride the orbit ends. */
+      /* Kunal 30 Sep: floor rings under the cube, no orbit line. Six chips clockwise
+         from Inbound in a gently tilted ring around the cube. */
       .stage {
         overflow: visible;
+        container-type: inline-size;
         --orbit-spring: linear(0, 0.042, 0.141, 0.267, 0.399, 0.526, 0.639, 0.735, 0.813, 0.875, 0.922,
           0.957, 0.981, 0.997, 1.007, 1.012, 1.015, 1.015, 1.014, 1.012, 1.01, 1.008, 1.007, 1.005, 1);
       }
@@ -72,20 +73,36 @@
         background: #000; color: #fff; font-size: 12px; font-weight: 700;
         letter-spacing: 0.02em; line-height: 1.2; white-space: nowrap;
       }
-      /* Labels ride a tilted elliptical orbit centred on the cube. --x and --y are the
-         label centre as a percent of the stage. Mobile values are set below. */
-      .orbit-node span { left: var(--x); top: var(--y); transform: translate(-50%, -50%); }
-      .orbit-node:nth-child(1) span { --x: 22%; --y: 44%; }   /* Inbound */
-      .orbit-node:nth-child(2) span { --x: 62%; --y: 24%; }   /* Storage */
-      .orbit-node:nth-child(3) span { --x: 83%; --y: 37%; }   /* Inventory management */
-      .orbit-node:nth-child(4) span { --x: 80%; --y: 58%; }   /* Kitting */
-      .orbit-node:nth-child(5) span { --x: 60%; --y: 75%; }   /* Special projects */
-      .orbit-node:nth-child(6) span { --x: 13%; --y: 62%; }   /* Fulfillment */
+      /* --dx and --dy place each label centre relative to the cube ink centre (50%, 49%)
+         in multiples of the rendered cube width, so the ring keeps hugging the cube once
+         the cube hits its cap while the stage keeps growing. --u must match .stage-cube
+         width and max-width in site.css. */
+      .orbit-node span {
+        --u: min(46cqw, 260px);
+        left: calc(50% + var(--dx) * var(--u));
+        top: calc(49% + var(--dy) * var(--u));
+        transform: translate(-50%, -50%);
+      }
+      .orbit-node:nth-child(1) span { --dx: -0.56; --dy: -0.06; }  /* Inbound */
+      .orbit-node:nth-child(2) span { --dx: -0.1; --dy: -0.5; }    /* Storage */
+      .orbit-node:nth-child(3) span { --dx: 0.46; --dy: -0.46; }   /* Inventory management */
+      .orbit-node:nth-child(4) span { --dx: 0.6; --dy: 0.02; }     /* Kitting */
+      .orbit-node:nth-child(5) span { --dx: 0.3; --dy: 0.46; }     /* Special projects */
+      .orbit-node:nth-child(6) span { --dx: -0.58; --dy: 0.38; }   /* Fulfillment */
       .stage-brand, .stage-bullets { display: none !important; }
       @media (max-width: 860px) {
         /* Keep % positions aligned to the SVG art (site.css sets 1/1 here). */
         .stage { aspect-ratio: 520 / 480; }
         .orbit-node span { font-size: 11px; padding: 6px 9px; white-space: normal; max-width: 8.5em; text-align: left; }
+      }
+      @media (max-width: 620px) {
+        /* Two line chips are larger next to the smaller cube, so the ring opens up. */
+        .orbit-node:nth-child(1) span { --dx: -0.63; --dy: -0.08; }
+        .orbit-node:nth-child(2) span { --dx: -0.09; --dy: -0.62; }
+        .orbit-node:nth-child(3) span { --dx: 0.63; --dy: -0.46; }
+        .orbit-node:nth-child(4) span { --dx: 0.7; --dy: 0.06; }
+        .orbit-node:nth-child(5) span { --dx: 0.3; --dy: 0.52; }
+        .orbit-node:nth-child(6) span { --dx: -0.61; --dy: 0.42; }
       }
       @media (prefers-reduced-motion: reduce) {
         .stage-cube { animation: none; transform: none; transition: opacity 200ms ease; }
@@ -173,14 +190,6 @@
               <ellipse class="ring ring-faint" cx="260" cy="324" rx="150" ry="47" />
               <ellipse class="ring ring-faint" cx="260" cy="324" rx="104" ry="33" />
               <ellipse class="ring" cx="260" cy="324" rx="58" ry="18" />
-              <ellipse
-                class="orbit"
-                cx="260"
-                cy="235"
-                rx="196"
-                ry="80"
-                transform="rotate(-14 260 235)"
-              />
             </svg>
             <svg class="cube stage-cube" viewBox="0 0 24 26" aria-hidden="true">
               <path
