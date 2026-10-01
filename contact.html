@@ -22,8 +22,9 @@
     <link rel="stylesheet" href="assets/css/site.css" />
   
     <style>
-      /* Kunal 26 Sep: cube ink 150% of S ink, 12px visible ink gap, no underline. */
-      .mark { gap: calc(12px - 0.481em); align-items: center; }
+      /* Cube ink 150% of S ink, visible ink gap 0.203em of the wordmark per the board, no underline. */
+      .mark { gap: 0; align-items: center; }
+      .mark .wordmark { margin-left: calc(0.203em - 0.481em); }
       .mark svg.cube, .mark .cube { width: 1.853em !important; height: 2.007em !important; }
     </style>
   </head>
