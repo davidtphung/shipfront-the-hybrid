@@ -29,10 +29,13 @@
       .mark svg.cube, .mark .cube { width: 1.853em !important; height: 2.007em !important; }
 
       /* Kunal 30 Sep: floor rings under the cube, no orbit line. Six chips clockwise
-         from Inbound in a gently tilted ring around the cube. */
+         from Inbound in a mirrored constellation around the cube. */
       .stage {
         overflow: visible;
         container-type: inline-size;
+        --t-fast: 90ms;
+        --t-base: 250ms;
+        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         --orbit-spring: linear(0, 0.042, 0.141, 0.267, 0.399, 0.526, 0.639, 0.735, 0.813, 0.875, 0.922,
           0.957, 0.981, 0.997, 1.007, 1.012, 1.015, 1.015, 1.014, 1.012, 1.01, 1.008, 1.007, 1.005, 1);
       }
@@ -41,7 +44,7 @@
       }
       .stage-art {
         pointer-events: none;
-        transition: opacity 240ms ease-out;
+        transition: opacity var(--t-base) ease-out;
       }
       @starting-style {
         .stage-art { opacity: 0; }
@@ -56,6 +59,11 @@
           .stage-cube { transform: translateY(8px); }
         }
       }
+      /* Each chip is pinned by the corner or edge nearest the cube, so every chip sits
+         the same gap --g from the painted hexagon and wide chips grow outward.
+         --u is the cube width and must match .stage-cube width and max-width in site.css.
+         Painted hexagon (path plus 1.1 stroke, pointy top): circumradius 0.2973u,
+         apothem 0.2575u, centre 2.08% of u above the cube box centre. */
       .orbit-nodes {
         position: absolute;
         inset: 0;
@@ -64,6 +72,11 @@
         list-style: none;
         z-index: 4;
         pointer-events: none;
+        --u: min(46cqw, 260px);
+        --g: clamp(20px, 0.11 * var(--u), 32px);
+        --hex-r: calc(0.2973 * var(--u));
+        --hex-a: calc(0.2575 * var(--u));
+        --ink-y: calc(50% - 0.0208 * var(--u));
       }
       .orbit-node { position: static; transform: none; }
       .orbit-node span {
@@ -71,46 +84,63 @@
         inset: auto; max-width: none;
         padding: 8px 12px; border: 1px solid #ff6a00; border-radius: 2px;
         background: #000; color: #fff; font-size: 12px; font-weight: 700;
-        letter-spacing: 0.02em; line-height: 1.2; white-space: nowrap;
+        letter-spacing: 0.02em; line-height: 1.2; white-space: nowrap; text-align: left;
+        /* Top and bottom pairs: inner edges sit --k either side of the axis. Special
+           projects is 3.9em wider than Inbound, so this --k puts the cluster's outer edges
+           level left and right; it never drops below 0.76g (1.5g between the pair). */
+        --k: max(0.76 * var(--g), var(--hex-a) + var(--g) - 3.9em);
+        /* Distance from the hexagon centre to the cube-facing edge of the top and bottom
+           rows that leaves gap --g from the inner corner to the slanted hexagon side. */
+        --row: calc(var(--hex-r) + (var(--g) - 0.5 * var(--k)) / 0.866);
       }
-      /* Each label centre sits on an ellipse around the cube ink centre (50%, 49%),
-         rotated by --tilt, with chips at equal 60deg steps clockwise from Inbound at
-         --t0. Semi-axes are --rx/--ry cube widths (--u) plus --pad for the chip's own
-         half size, so the ring hugs the cube from 360 to the 260px cube cap.
-         --nudge opens room beside the wide Inventory management chip and lifts
-         Special projects off Fulfillment.
-         --u must match .stage-cube width and max-width in site.css. */
-      .orbit-nodes {
-        --rx: 0.33;
-        --ry: 0.31;
-        --pad: 46px;
-        --tilt: -8deg;
-        --t0: 188deg;
+      .orbit-node:nth-child(1) span {  /* Inbound */
+        --i: 0; --from: -6px 0;
+        right: calc(50% + var(--hex-a) + var(--g)); top: var(--ink-y); transform: translateY(-50%);
       }
-      .orbit-node span {
-        --u: min(46cqw, 260px);
-        --ax: calc(var(--rx) * var(--u) + var(--pad));
-        --ay: calc(var(--ry) * var(--u) + var(--pad));
-        --t: calc(var(--t0) + var(--i) * 60deg + var(--nudge, 0deg));
-        left: calc(50% + var(--ax) * cos(var(--t)) * cos(var(--tilt)) - var(--ay) * sin(var(--t)) * sin(var(--tilt)));
-        top: calc(49% + var(--ax) * cos(var(--t)) * sin(var(--tilt)) + var(--ay) * sin(var(--t)) * cos(var(--tilt)));
-        transform: translate(-50%, -50%);
+      .orbit-node:nth-child(2) span {  /* Storage */
+        --i: 1; --from: -3px -5.2px;
+        right: calc(50% + var(--k)); bottom: calc(100% - var(--ink-y) + var(--row));
       }
-      .orbit-node:nth-child(1) span { --i: 0; }                  /* Inbound */
-      .orbit-node:nth-child(2) span { --i: 1; --nudge: -8deg; }  /* Storage */
-      .orbit-node:nth-child(3) span { --i: 2; }                  /* Inventory management */
-      .orbit-node:nth-child(4) span { --i: 3; }                  /* Kitting */
-      .orbit-node:nth-child(5) span { --i: 4; --nudge: -4deg; }  /* Special projects */
-      .orbit-node:nth-child(6) span { --i: 5; }                  /* Fulfillment */
+      .orbit-node:nth-child(3) span {  /* Inventory management, one word per line to match the other widths */
+        --i: 2; --from: 3px -5.2px;
+        left: calc(50% + var(--k)); bottom: calc(100% - var(--ink-y) + var(--row));
+        white-space: normal; width: min-content;
+      }
+      .orbit-node:nth-child(4) span {  /* Kitting */
+        --i: 3; --from: 6px 0;
+        left: calc(50% + var(--hex-a) + var(--g)); top: var(--ink-y); transform: translateY(-50%);
+      }
+      .orbit-node:nth-child(5) span {  /* Special projects */
+        --i: 4; --from: 3px 5.2px;
+        left: calc(50% + var(--k)); top: calc(var(--ink-y) + var(--row));
+      }
+      .orbit-node:nth-child(6) span {  /* Fulfillment */
+        --i: 5; --from: -3px 5.2px;
+        right: calc(50% + var(--k)); top: calc(var(--ink-y) + var(--row));
+      }
       .stage-brand, .stage-bullets { display: none !important; }
       @media (max-width: 860px) {
         /* Keep % positions aligned to the SVG art (site.css sets 1/1 here). */
         .stage { aspect-ratio: 520 / 480; }
-        .orbit-node span { font-size: 11px; padding: 6px 9px; white-space: normal; max-width: 8.5em; text-align: left; }
+        .orbit-node span { font-size: 11px; padding: 6px 9px; }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        /* Chips settle 6px inward once the cube starts to land, 50ms apart clockwise. */
+        .orbit-node span {
+          transition: opacity 240ms ease-out, translate 360ms var(--ease-out-expo);
+          transition-delay: calc(160ms + var(--i) * 50ms);
+        }
+        @starting-style {
+          .orbit-node span { opacity: 0; translate: var(--from); }
+        }
       }
       @media (prefers-reduced-motion: reduce) {
         .stage-cube { animation: none; transform: none; transition: opacity 200ms ease; }
         .stage-art { transition: opacity 200ms ease; }
+        .orbit-node span { transition: opacity 140ms linear; }
+        @starting-style {
+          .orbit-node span { opacity: 0; }
+        }
       }
     </style>
   </head>
