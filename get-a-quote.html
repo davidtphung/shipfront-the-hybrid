@@ -87,7 +87,20 @@
       <section class="shell">
         <div class="form-grid">
           <div class="form-card reveal">
-            <form data-quote-form novalidate>
+            <form
+              data-quote-form
+              action="https://formsubmit.co/info@myshipfront.com"
+              method="POST"
+              novalidate
+            >
+              <input type="hidden" name="_subject" value="New Shipfront quote request" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_next" value="" data-next />
+              <div class="hp-field" aria-hidden="true">
+                <label for="_honey">Leave this field empty</label>
+                <input id="_honey" type="text" name="_honey" tabindex="-1" autocomplete="off" />
+              </div>
               <div class="field">
                 <label for="name">Name <span class="req">*</span></label>
                 <input
@@ -139,6 +152,14 @@
               </div>
 
               <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+              <p class="form-status" data-quote-status role="status" aria-live="polite"></p>
+              <div class="form-fail" data-quote-fail hidden tabindex="-1">
+                <p>
+                  Something went wrong and your request was not sent. Please try again, or
+                  <a href="mailto:info@myshipfront.com" data-fail-mailto>email us your details</a>
+                  at info@myshipfront.com.
+                </p>
+              </div>
             </form>
 
             <div class="form-done" data-quote-done>
@@ -149,7 +170,7 @@
               </div>
               <h3>Thank you, <span data-done-name></span>.</h3>
               <p>
-                Your details are on their way to
+                Thanks. We will be in touch soon. You can also reach us at
                 <a href="mailto:info@myshipfront.com">info@myshipfront.com</a>.
               </p>
             </div>
