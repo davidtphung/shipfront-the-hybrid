@@ -97,9 +97,9 @@
         --i: 0; --from: -6px 0;
         right: calc(50% + var(--hex-a) + var(--g)); top: var(--ink-y); transform: translateY(-50%);
       }
-      .orbit-node:nth-child(2) span {  /* Storage, 0.1u further left so the gap to Inventory management matches the other labels */
+      .orbit-node:nth-child(2) span {  /* Storage, 0.4u left of the mirror line: about 92px from Inventory management at 390, scaling with the cube */
         --i: 1; --from: -3px -5.2px;
-        right: calc(50% + var(--k) + 0.1 * var(--u)); bottom: calc(100% - var(--ink-y) + var(--row));
+        right: calc(50% + var(--k) + 0.4 * var(--u)); bottom: calc(100% - var(--ink-y) + var(--row));
       }
       .orbit-node:nth-child(3) span {  /* Inventory management, one word per line to match the other widths */
         --i: 2; --from: 3px -5.2px;
