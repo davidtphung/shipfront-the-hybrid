@@ -2145,3 +2145,38 @@ h4,
 /* ---------- Kunal 30 Sep: quote page, cut the dead space under the address panel ---------- */
 .form-grid { padding-bottom: 24px; }
 main:has(.form-grid) + .site-footer { margin-top: 24px; }
+
+/* Quote form delivery states. Honeypot is off screen, status and error take no space until used. */
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.form-status:empty {
+  display: none;
+}
+.form-status {
+  margin: 12px 0 0;
+  font-size: 14px;
+  opacity: 0.75;
+}
+.form-fail {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border: 1px solid #ff6a00;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.form-fail p {
+  margin: 0;
+}
+.form-fail a {
+  color: inherit;
+  text-decoration: underline;
+}
+.form-fail:focus {
+  outline: 2px solid #ff6a00;
+  outline-offset: 2px;
+}

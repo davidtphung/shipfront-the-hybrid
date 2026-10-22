@@ -86,13 +86,26 @@
   }
 
   var done = document.querySelector("[data-quote-done]");
-  var doneName = document.querySelector("[data-done-name]");
   var card = form.closest(".form-card");
   var submitBtn = form.querySelector('button[type="submit"]');
-  /* Repeat submits inside this window are dropped so the mail app opens once.
-     The button keeps its press feedback; no disabled state or pointer lock. */
-  var SUBMIT_GUARD_MS = 1500;
-  var lastSubmitAt = -Infinity;
+  var status = form.querySelector("[data-quote-status]");
+  var fail = form.querySelector("[data-quote-fail]");
+  var failMailto = form.querySelector("[data-fail-mailto]");
+  var honey = form.querySelector('input[name="_honey"]');
+  var nextField = form.querySelector("[data-next]");
+  var ENDPOINT = "https://formsubmit.co/ajax/info@myshipfront.com";
+  var submitLabel = submitBtn ? submitBtn.textContent : "Submit";
+  var sending = false;
+
+  /* Without JS the form posts straight to Formsubmit. _next brings the visitor
+     back here with ?sent=1 so the same thank-you state shows. */
+  if (nextField) {
+    nextField.value = window.location.href.split("#")[0].split("?")[0] + "?sent=1";
+  }
+
+  var fields = Array.prototype.slice.call(
+    form.querySelectorAll(".field input, .field textarea")
+  );
 
   var validators = {
     name: function (value) {
@@ -121,7 +134,7 @@
     return !message;
   };
 
-  form.querySelectorAll("input, textarea").forEach(function (input) {
+  fields.forEach(function (input) {
     input.addEventListener("blur", function () {
       check(input);
     });
@@ -132,16 +145,65 @@
     });
   });
 
+  var showTray = function () {
+    form.hidden = true;
+    if (card) {
+      card.classList.add("is-done");
+    }
+    if (done) {
+      done.classList.add("is-visible");
+      done.setAttribute("tabindex", "-1");
+      done.focus();
+    }
+  };
+
+  var resetButton = function () {
+    sending = false;
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.removeAttribute("aria-busy");
+      submitBtn.classList.remove("is-morphing");
+      submitBtn.textContent = submitLabel;
+    }
+  };
+
+  var showFail = function (values) {
+    resetButton();
+    if (status) {
+      status.textContent = "";
+    }
+    if (failMailto) {
+      var body =
+        "Name: " + values.name +
+        "\nEmail: " + values.email +
+        "\nPhone: " + values.phone +
+        "\nDescription: " + values.description;
+      failMailto.href =
+        "mailto:info@myshipfront.com?subject=" +
+        encodeURIComponent("Quote request: " + values.name) +
+        "&body=" +
+        encodeURIComponent(body);
+    }
+    if (fail) {
+      fail.hidden = false;
+      fail.focus();
+    }
+  };
+
+  if (/[?&]sent=1\b/.test(window.location.search)) {
+    showTray("");
+  }
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-
-    if (Date.now() - lastSubmitAt < SUBMIT_GUARD_MS) {
+    if (sending) {
       return;
     }
+    if (fail) {
+      fail.hidden = true;
+    }
 
-    var inputs = Array.prototype.slice.call(form.querySelectorAll("input, textarea"));
-    var valid = inputs.map(check).every(Boolean);
-
+    var valid = fields.map(check).every(Boolean);
     if (!valid) {
       var firstBad = form.querySelector('[aria-invalid="true"]');
       if (firstBad) {
@@ -150,55 +212,64 @@
       return;
     }
 
-    lastSubmitAt = Date.now();
-
     var values = {};
-    inputs.forEach(function (input) {
+    fields.forEach(function (input) {
       values[input.name] = input.value.trim();
     });
 
-    var subject = "Quote request: " + values.name;
-    var body =
-      "Name: " +
-      values.name +
-      "\nEmail: " +
-      values.email +
-      "\nPhone: " +
-      values.phone +
-      "\nDescription: " +
-      (values.description || "");
-
-    if (doneName) {
-      doneName.textContent = values.name.split(" ")[0];
+    /* Bots fill the hidden field. Show success and send nothing. */
+    if (honey && honey.value) {
+      showTray(values.name);
+      return;
     }
 
-    if (submitBtn && !reduceMotion) {
-      submitBtn.classList.add("is-morphing");
+    sending = true;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.setAttribute("aria-busy", "true");
+      if (!reduceMotion) {
+        submitBtn.classList.add("is-morphing");
+      }
       submitBtn.textContent = "Sending";
     }
-
-    var showTray = function () {
-      form.hidden = true;
-      if (card) {
-        card.classList.add("is-done");
-      }
-      if (done) {
-        done.classList.add("is-visible");
-        done.setAttribute("tabindex", "-1");
-        done.focus();
-      }
-    };
-
-    if (reduceMotion) {
-      showTray();
-    } else {
-      window.setTimeout(showTray, 180);
+    if (status) {
+      status.textContent = "Sending your request.";
     }
 
-    window.location.href =
-      "mailto:info@myshipfront.com?subject=" +
-      encodeURIComponent(subject) +
-      "&body=" +
-      encodeURIComponent(body);
+    var payload = {
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      description: values.description,
+      _replyto: values.email,
+      _subject: "Quote request: " + values.name,
+      _template: "table",
+      _captcha: "false",
+      _honey: ""
+    };
+
+    window
+      .fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok || String(data.success) !== "true") {
+            throw new Error((data && data.message) || "Send failed");
+          }
+        });
+      })
+      .then(function () {
+        if (status) {
+          status.textContent = "";
+        }
+        resetButton();
+        showTray(values.name);
+      })
+      .catch(function () {
+        showFail(values);
+      });
   });
 })();
