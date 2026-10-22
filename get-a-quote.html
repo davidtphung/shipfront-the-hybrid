@@ -93,7 +93,7 @@
               method="POST"
               novalidate
             >
-              <input type="hidden" name="_subject" value="New Shipfront quote request" />
+              <input type="hidden" name="_subject" value="Quote request" data-subject />
               <input type="hidden" name="_template" value="table" />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_next" value="" data-next />
@@ -162,17 +162,19 @@
               </div>
             </form>
 
-            <div class="form-done" data-quote-done>
+            <div
+              class="form-done"
+              data-quote-done
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            >
               <div class="tick">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M4 12.5 9.5 18 20 6.5" />
                 </svg>
               </div>
-              <h3>Thank you, <span data-done-name></span>.</h3>
-              <p>
-                Thanks. We will be in touch soon. You can also reach us at
-                <a href="mailto:info@myshipfront.com">info@myshipfront.com</a>.
-              </p>
+              <h3>Thank you for your interest, one of our agents will reach out to you shortly!</h3>
             </div>
           </div>
 

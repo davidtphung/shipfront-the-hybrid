@@ -86,7 +86,6 @@
   }
 
   var done = document.querySelector("[data-quote-done]");
-  var doneName = document.querySelector("[data-done-name]");
   var card = form.closest(".form-card");
   var submitBtn = form.querySelector('button[type="submit"]');
   var status = form.querySelector("[data-quote-status]");
@@ -146,10 +145,7 @@
     });
   });
 
-  var showTray = function (name) {
-    if (doneName) {
-      doneName.textContent = name ? name.split(" ")[0] : "there";
-    }
+  var showTray = function () {
     form.hidden = true;
     if (card) {
       card.classList.add("is-done");
@@ -184,7 +180,7 @@
         "\nDescription: " + values.description;
       failMailto.href =
         "mailto:info@myshipfront.com?subject=" +
-        encodeURIComponent("New Shipfront quote request") +
+        encodeURIComponent("Quote request: " + values.name) +
         "&body=" +
         encodeURIComponent(body);
     }
@@ -246,7 +242,7 @@
       phone: values.phone,
       description: values.description,
       _replyto: values.email,
-      _subject: "New Shipfront quote request",
+      _subject: "Quote request: " + values.name,
       _template: "table",
       _captcha: "false",
       _honey: ""
